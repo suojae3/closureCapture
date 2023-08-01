@@ -1,7 +1,7 @@
 <br/><br/>
 
 
-## 왜 closure에서 [weak self]를 선언해야할까?
+## 왜 closure의 값은 누적 되는걸까?
 
 <br/>
 
