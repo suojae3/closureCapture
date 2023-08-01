@@ -1,7 +1,7 @@
 <br/><br/>
 
 
-## Closure의 값은 왜 누적 되는걸까?
+## Closure 값은 왜 누적 되는걸까?
 
 <br/>
 
@@ -57,8 +57,8 @@ func calculateFunc() -> ((Int) -> (Int)) {
 var sqaureFunc = calculateFunc()
 
 squareFunc(10) //100
-squareFunc(20) //400
-squareFunc(30) //900
+squareFunc(20) //500
+squareFunc(30) //1400 값이 누적되고 있다!
 ```
 1. Heap 영역은 Stack 영역보다 메모리를 더 길게 가지고 간다
 2. 위의 코드에서 `calculateFunc()`는 Stack에, 클로저로 쓰이고 있는 `square()`는 Heap에 저장된다
@@ -66,6 +66,30 @@ squareFunc(30) //900
 4. 이때 `calculate()` 가 종료되면 Stack영역에서 사라짐에 따라 참조하고 있던 `sum`도 메모리에서 사라진다
 5. 이를 대비해서 클로저인 `square()`는 Heap에다 미리 `sum`의 값을 저장하게 되는데 이것이 바로 **Capture**이다
 6. 따라서 closure가 capture한 값은 변수명만 같을 뿐 Heap영역에 따로 저장되기 때문에 stack 영역의 함수가 종료되어도 이후에 결과값이 누적이 되는 모습을 보여준다
+
+<br/>
+
+```swift
+func calculateFunc() -> ((Int) -> (Int)) {
+
+    func square(num: Int) -> Int {
+        var sum = 0
+        sum += (num * num)
+        return sum
+    }
+
+    return square
+}
+
+var sqaureFunc = calculateFunc()
+
+squareFunc(10) //100
+squareFunc(20) //400
+squareFunc(30) //900 값이 누적되지 않고 있다!
+```
+1. 앞 선 코드와 다르게 이번 예제는 closure로 쓰이는 `squqre()`가 외부변수를 참조(refer)하지 않고있다.
+2. 이 경우 굳이 `sum`변수를 Heap에 공간을 따로 만들 필요가 없어진다(어차피 `square()`가 실행될 때마다 내부에서 `sum`이 있기 때문에)
+3. 따라서 capture현상이 일어나지 않게되며 `sum`도 stack 에서만 생성되고 사라지기 때문에 값이 누적되지 않는다.
 
 
 
