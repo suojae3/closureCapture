@@ -53,6 +53,22 @@ func calculateFunc() -> ((Int) -> (Int)) {
 
     return square
 }
+
+var sqaureFunc = calculateFunc()
+
+squareFunc(10) //100
+squareFunc(20) //400
+squareFunc(30) //900
 ```
+1. Heap 영역은 Stack 영역보다 메모리를 더 길게 가지고 간다
+2. 위의 코드에서 `calculateFunc()`는 Stack에, 클로저로 쓰이고 있는 `square()`는 Heap에 저장된다
+3. `sqaure()`는 Heap영역에서 Stack영역에 있는 `calculate()`의 `sum`을 참조(refer)하고 있다.
+4. 이때 `calculate()` 가 종료되면 Stack영역에서 사라짐에 따라 참조하고 있던 `sum`도 메모리에서 사라진다
+
+
+
+
+
+
 
 
