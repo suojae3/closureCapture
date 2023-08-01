@@ -17,7 +17,7 @@
 
 1. 클로저는 기본적으로 RAM 메모리 공간 중 Heap에 저장된다 (클로저는 기본적으로 변수에 함수를 담는 것)
 2. 클로저는 메모리 주소를 가지고 있고 실행하면 바로 코드영역의 주소를 찾아간다
-3. 즉 클로저는 클래스처럼 Reference Type(참조형식)으로 Swift의 ARC모델에 의해 메모리 관리가 된다.
+3. 즉 클로저는 클래스처럼 Reference Type(참조형식)으로 Swift의 ARC(automatic reference counting) 모델에 의해 메모리 관리가 된다.
 
 <br/>
 
@@ -64,6 +64,8 @@ squareFunc(30) //900
 2. 위의 코드에서 `calculateFunc()`는 Stack에, 클로저로 쓰이고 있는 `square()`는 Heap에 저장된다
 3. `sqaure()`는 Heap영역에서 Stack영역에 있는 `calculate()`의 `sum`을 참조(refer)하고 있다.
 4. 이때 `calculate()` 가 종료되면 Stack영역에서 사라짐에 따라 참조하고 있던 `sum`도 메모리에서 사라진다
+5. 이를 대비해서 클로저인 `square()`는 Heap에다 미리 `sum`의 값을 저장하게 되는데 이것이 바로 **Capture**이다
+6. 따라서 closure가 capture한 값은 변수명만 같을 뿐 Heap영역에 따로 저장되기 때문에 결과값이 누적이 되는 모습을 보여준다
 
 
 
