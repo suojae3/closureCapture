@@ -65,7 +65,7 @@ squareFunc(30) //900
 3. `sqaure()`는 Heap영역에서 Stack영역에 있는 `calculate()`의 `sum`을 참조(refer)하고 있다.
 4. 이때 `calculate()` 가 종료되면 Stack영역에서 사라짐에 따라 참조하고 있던 `sum`도 메모리에서 사라진다
 5. 이를 대비해서 클로저인 `square()`는 Heap에다 미리 `sum`의 값을 저장하게 되는데 이것이 바로 **Capture**이다
-6. 따라서 closure가 capture한 값은 변수명만 같을 뿐 Heap영역에 따로 저장되기 때문에 결과값이 누적이 되는 모습을 보여준다
+6. 따라서 closure가 capture한 값은 변수명만 같을 뿐 Heap영역에 따로 저장되기 때문에 stack 영역의 함수가 종료되어도 이후에 결과값이 누적이 되는 모습을 보여준다
 
 
 
